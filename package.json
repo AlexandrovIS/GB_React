@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "Messendger GeekBrains Course",
   "main": "index.js",
+  
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
     "dev": "cross-env NODE_ENV=development webpack",
-    "start": "cross-env NODE_ENV=development webpack server"
+    "watch": "cross-env NODE_ENV=development webpack --watch",
+    "start": "cross-env NODE_ENV=development webpack serve"
   },
   "repository": {
     "type": "git",
@@ -24,7 +26,7 @@
   },
   "homepage": "https://github.com/AlexandrovIS/GB_React#readme",
   "devDependencies": {
-    "@babel/core": "^7.14.2",
+    "@babel/core": "^7.14.3",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/preset-env": "^7.14.2",
     "@babel/preset-react": "^7.13.13",
@@ -39,6 +41,7 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.1",
     "mini-css-extract-plugin": "^1.6.0",
     "optimize-css-assets-webpack-plugin": "^6.0.0",
@@ -48,6 +51,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "normalize.css": "^8.0.1",
     "prettier": "^2.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"

@@ -1,31 +1,30 @@
-// import { a } from './home'
-
 import React from 'react'
 import ReactDom from 'react-dom'
-import './index.css'
+import './style/style.css'
+import { a } from './home'
 
-class ClassExample extends React.Component {
-  render() {
-    return (
-      <div>
-        <h2>
-          Hello Class
-        </h2>
-      </div>
-    )
-  }
-}
+// class ClassExample extends React.Component {
+//   render() {
+//     return (
+//       <div>
+//         <h2>
+//           Hello Class
+//         </h2>
+//       </div>
+//     )
+//   }
+// }
 
-const Example = () => {
-  return (
-    <div>
-      <h1>
-        Hello react
-      </h1>
-      <ClassExample />
-    </div>
-  )
-}
+// const Example = () => {
+//   return (
+//     <div>
+//       <h1>
+//         Hello react
+//       </h1>
+//       <ClassExample />
+//     </div>
+//   )
+// }
 
 const Message = ({ message }) => {
   return (
@@ -40,3 +39,5 @@ const MessageField = ({ message }) => {
 }
 
 ReactDom.render(<MessageField message={['Message']} />, document.getElementById('root'))
+
+console.log(a)

@@ -1,0 +1,9 @@
+@import "~normalize.css";
+@import "fonts.css";
+
+body {
+  background-color: thistle;
+  max-width: 1140px;
+  margin: 0 auto;
+  font-family: "Roboto", sans-serif;
+}

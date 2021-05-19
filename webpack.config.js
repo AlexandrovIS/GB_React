@@ -4,11 +4,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 
-
 const isDev = process.env.NODE_ENV === 'development'
 
 const getFileName = (ext = '[ext]', name = '[name]') => {
-  return isDev ? `${name}.${ext}` : `${name}.[contenthash].${ext}`
+  return isDev ? `${name}.${ext}` : `${name}.[hash].${ext}`
 }
 
 module.exports = {
@@ -18,7 +17,7 @@ module.exports = {
     app: path.resolve(__dirname, 'src/index.js')
   },
   output: {
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },
   optimization: isDev ? {} : { minimize: true, minimizer: [new OptimizeCssAssetsWebpackPlugin()] },
   plugins: [
@@ -44,7 +43,7 @@ module.exports = {
       {
         test: /\.js(x?)$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        use: ['babel-loader']
       },
       {
         test: /\.css$/,
@@ -52,12 +51,26 @@ module.exports = {
         use: [isDev ? 'style-loader' : {
           loader: MiniCssExtractPlugin.loader,
           options: {
-            publicPath: path.resolve(__dirname, 'dist/css')
+            publicPath: path.resolve(__dirname, 'dist/')
           }
         },
         {
           loader: 'css-loader', options: {
             sourceMap: isDev,
+          }
+        }
+        ]
+      },
+      {
+        test:/\.(png|jpg|jpeg|svg|gif)$/,
+        use:['file-loader']
+      },
+      {
+        test:/\.(ttf|woff|woff2|eot)$/,
+        use:[isDev?{loader:'file-loader'}:{
+          loader:'file-loader',
+          options:{
+            name:`./css/${getFileName()}`
           }
         }
         ]
@@ -77,7 +90,7 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     contentBase: path.resolve(__dirname, 'dist'),
-    open: true,
+    open: 'Google Chrome',
     hot: true,
     port: 3000,
   },
