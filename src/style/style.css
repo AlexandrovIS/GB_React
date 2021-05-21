@@ -1,5 +1,6 @@
 @import "~normalize.css";
-@import "fonts.css";
+@import "./fonts.css";
+@import "./message.molule.css";
 
 body {
   background-color: thistle;

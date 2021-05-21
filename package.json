@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Messendger GeekBrains Course",
   "main": "index.js",
-  
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
     "dev": "cross-env NODE_ENV=development webpack",
@@ -53,6 +52,7 @@
   "dependencies": {
     "normalize.css": "^8.0.1",
     "prettier": "^2.3.0",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   }

@@ -67,10 +67,11 @@ module.exports = {
       },
       {
         test:/\.(ttf|woff|woff2|eot)$/,
+        exclude: /node_modules/,
         use:[isDev?{loader:'file-loader'}:{
           loader:'file-loader',
           options:{
-            name:`./css/${getFileName()}`
+            name: `./fonts/${getFileName()}`,
           }
         }
         ]
