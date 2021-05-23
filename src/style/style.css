@@ -1,0 +1,12 @@
+@import "~normalize.css";
+@import "./fonts.css";
+
+body {
+  background-color: rgba(216, 191, 216, 0.3);
+  font-family: "Roboto", sans-serif;
+}
+
+.wrapper {
+  max-width: 1140px;
+  margin: 0 auto;
+}
