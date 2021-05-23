@@ -1,16 +1,21 @@
+import {ThemeProvider, createMuiTheme} from '@material-ui/core'
 import React from 'react'
 import ReactDom from 'react-dom'
-import {MessageField} from './components'
+import {Layout} from './components'
+
 import './style/style.css'
 
 const App=()=>{
-  return <><MessageField/></>
+  return <>
+ <Layout/>
+  </>
 }
 
+const theme=createMuiTheme({})
 
 ReactDom.render(
-  <React.Fragment>
+  <ThemeProvider theme={theme}>
   <App/>
-  </React.Fragment>,
+  </ThemeProvider>,
   document.getElementById("root"),
 )

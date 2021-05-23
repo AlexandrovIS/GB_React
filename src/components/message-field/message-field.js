@@ -1,38 +1,91 @@
+import {Input, Button, InputAdornment,withStyles, List} from '@material-ui/core'
+import {Send} from '@material-ui/icons'
 import React from 'react'
 import {Message} from '../message'
+
+import styles from './message-field.module.css'
+
+const StyledInput=withStyles((theme)=>({
+  root:{
+    '&':{
+      color:'#9a9fa1',
+      padding:'10px 15px',
+      fontSize:'16px'
+    }
+  }
+}))(Input)
 
 export class MessageField extends React.Component{
   state={
     messages:[
-      // {author:'User', value:'Message 1!', date:`${new Date()}`}
-    ]
+      {author:'User', value:'Message 1!', date:`${new Date()}`}
+    ],
+    value:''
+    
   }
 
-  componentDidUpdate(){
-    const {messages}=this.state
-    const lastMes=messages[messages.length-1]
+  componentDidUpdate(props,state){
 
-    if(lastMes.author==='User'){
-      this.setState({
+    const {messages}=this.state
+    const lastMessage=messages[messages.length-1]
+    
+    if(lastMessage.author === 'User' && state.messages ==! messages){
+      setTimeout(()=>{
+        this.setState({
           messages:[...messages,{author:'Both',value:' Both message ', date: `${new Date()}`}]
         })
+      },300)
     }
 }
 
-  sendMessage=()=>{
+  sendMessage=({author,value})=>{
     const {messages}=this.state
 
     this.setState({
-      messages:[...messages,{author:'User',value:'push the button - new message ', date: `${new Date()}`}]
+      messages:[...messages,{author,value, date: `${new Date()}`}],
+      value:''
     })
   }
 
-  render(){
-    const {messages}=this.state
+  handelChangeInput=({target})=>{
+    this.setState({
+      value:target.value
+    })
+  }
 
-    return <>
-     <button onClick={this.sendMessage}>Send message</button>
+  handelPressInput=({code})=>{
+    const {value}=this.state
+    if(code==='Enter'&&value){
+    
+        this.sendMessage({author:'User',value})
+      
+      
+    }
+  }
+
+  render(){
+    const {messages, value}=this.state
+
+    return <div className={styles.message__field}>
+    {/* <Input placeholder='Input'/> */}
     {messages.map((item,idx)=>(<Message message={item} key={idx}/>))}
-      </>
+    {/* <Button  onClick={this.sendMessage}>Send message</Button> */}
+    <StyledInput 
+    value={value}
+    onChange={this.handelChangeInput}
+    onKeyPress={this.handelPressInput}
+    // onKeyUp={()=>this.sendMessage({author:'User',value})}
+    placeholder='StyledInput' 
+    fullWidth={true} 
+    endAdornment={
+      <InputAdornment>
+      {value&&(<Send className={styles.icon} 
+      onClick={()=>this.sendMessage({author:'User',value})}/>)}
+      </InputAdornment>
+      }
+    />
+    
+      </div>
   }
 }
+

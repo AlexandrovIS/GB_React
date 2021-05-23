@@ -1,10 +1,12 @@
 @import "~normalize.css";
 @import "./fonts.css";
-@import "./message.molule.css";
 
 body {
-  background-color: thistle;
+  background-color: rgba(216, 191, 216, 0.3);
+  font-family: "Roboto", sans-serif;
+}
+
+.wrapper {
   max-width: 1140px;
   margin: 0 auto;
-  font-family: "Roboto", sans-serif;
 }
