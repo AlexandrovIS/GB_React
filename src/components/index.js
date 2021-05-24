@@ -1,5 +1,4 @@
-export * from './message'
-export * from './message-field'
+export * from './message-list'
 export * from './chat-list'
 export * from './Layout'
 export * from './header'

@@ -1,9 +1,8 @@
 import {Input, Button, InputAdornment,withStyles, List} from '@material-ui/core'
 import {Send} from '@material-ui/icons'
 import React from 'react'
-import {Message} from '../message'
-
-import styles from './message-field.module.css'
+import {Message} from './message'
+import styles from './message-list.module.css'
 
 const StyledInput=withStyles((theme)=>({
   root:{
@@ -15,21 +14,19 @@ const StyledInput=withStyles((theme)=>({
   }
 }))(Input)
 
-export class MessageField extends React.Component{
+export class MessageList extends React.Component{
   state={
     messages:[
       {author:'User', value:'Message 1!', date:`${new Date()}`}
     ],
     value:''
-    
   }
 
   componentDidUpdate(props,state){
-
     const {messages}=this.state
     const lastMessage=messages[messages.length-1]
     
-    if(lastMessage.author === 'User' && state.messages ==! messages){
+    if(lastMessage.author === 'User' && state.messages !== messages){
       setTimeout(()=>{
         this.setState({
           messages:[...messages,{author:'Both',value:' Both message ', date: `${new Date()}`}]
