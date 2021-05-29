@@ -25,7 +25,7 @@ export class MessageList extends React.Component{
   componentDidUpdate(props,state){
     const {messages}=this.state
     const lastMessage=messages[messages.length-1]
-    
+
     if(lastMessage.author === 'User' && state.messages !== messages){
       setTimeout(()=>{
         this.setState({
@@ -53,10 +53,10 @@ export class MessageList extends React.Component{
   handelPressInput=({code})=>{
     const {value}=this.state
     if(code==='Enter'&&value){
-    
+
         this.sendMessage({author:'User',value})
-      
-      
+
+
     }
   }
 
@@ -81,8 +81,7 @@ export class MessageList extends React.Component{
       </InputAdornment>
       }
     />
-    
+
       </div>
   }
 }
-
