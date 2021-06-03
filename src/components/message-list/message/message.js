@@ -12,12 +12,11 @@ export class Message extends React.Component{
   }
 
   render(){
-    const {message}=this.props
-    const {author, value, date}=message
-
+    const {message:{message,author,date}}=this.props
+    
     return (
     <ul className={style.message__list}>
-      <li className={style.message}>{value}</li>  
+      <li className={style.message}>{message}</li>  
       <div className={style.flex__li}> 
       <li>author: {author}</li>
       <li>date: {date}</li>

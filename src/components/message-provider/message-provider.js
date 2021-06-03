@@ -14,12 +14,13 @@ export class MessageProvider extends React.Component{
     }
   }
 
-  handelChangeValue=(value)=>{
+  handlerChangeValue=(event)=>{
     const {match}=this.props
     const {params}=match
+    const {target:{value}}=event
 
     this.setState({
-      conversations:this.conversations.map(conversation=>{
+      conversations:this.state.conversations.map(conversation=>{
         if(params.roomId===conversation.title){
           return {...conversation,value}
         }
@@ -33,16 +34,24 @@ export class MessageProvider extends React.Component{
       return
     }
 
-    const {messages}=this.state
+    const {messages,conversations}=this.state
     const {match}=this.props
     const {params}=match
-    const newMessage={author,message,date:new Date()}
+    const newMessage={author,message,date:`${new Date().getHours()} ${new Date().getMinutes()}`}
 
     this.setState({
-      messages:{
+      messages: {
         ...messages,
-        [params.roomId]:[...(messages[params.roomId]||[]),newMessage]
-      }
+        [params.roomId]: [...(messages[params.roomId] || []), newMessage],
+      },
+      conversations: conversations.map((conversation) =>
+        conversation.title === params.roomId
+          ? {
+              ...conversation,
+              value: '',
+            }
+          : conversation,
+      ),
     })
   }
 
@@ -60,7 +69,7 @@ export class MessageProvider extends React.Component{
     }
     const actions={
       sendMessage:this.sendMessage,
-      handelChangeValue:this.handelChangeValue
+      handlerChangeValue:this.handlerChangeValue
     }
 
     return children([state,actions])
