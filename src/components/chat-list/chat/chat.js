@@ -21,16 +21,3 @@ export class Chat extends React.Component{
   )
   }
 }
-
-{/* <ListItem
-onClick={(event) =>{handelListItemClick(event,index)}}
-selected={selected===index}>
-<ListItemAvatar >
-      <Avatar>
-      <ImageIcon />
-      </Avatar>
-    </ListItemAvatar>
-<ListItemText 
-primary={title} 
-secondary={`${new Date().toDateString()}`} />
-</ListItem> */}
