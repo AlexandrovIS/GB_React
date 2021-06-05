@@ -1,0 +1,20 @@
+.message__list {
+  list-style: none;
+  background-color: rgba(216, 191, 216, 0.3);
+  margin: 0 0 0.5rem 0;
+  padding: 1rem;
+  font-weight: 300;
+  font-size: 12px;
+}
+.message__list li {
+}
+.message {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 0.3rem;
+}
+
+.flex__li {
+  display: flex;
+  justify-content: space-between;
+}
