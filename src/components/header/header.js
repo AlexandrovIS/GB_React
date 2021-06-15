@@ -10,7 +10,7 @@ export class Header extends React.Component{
     return <>
     <Link to="/"> home </Link>   
     <Link to='/pages/profil'> profil </Link>
-    <Link to='/pages/chats'> chats </Link>
+    <Link to='/pages/chats/:roomId'> chats </Link>
     <Switch>
       <Route path={['/pages/profil']}>
          <Profil/>
