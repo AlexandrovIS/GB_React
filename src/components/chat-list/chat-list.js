@@ -6,32 +6,22 @@ import { Chat } from './chat'
 
 
 export class ChatList extends React.Component{
-  
   render(){
-    const {
-      conversations,
-      allMessages,
-      match: { params },
-    } = this.props
-
-    const chatId = params.roomId
-
+    const {conversations} = this.props
     return (
-      <List component="nav">
-      {conversations.map((chat) => {
-        const currentMessage = allMessages[chat.title]
-
-        return (
-          <Link key={chat.title} to={`/chat/${chat.title}`}>
-            <Chat
-              selected={chat.title === chatId}
-              chat={chat}
-              lastMessage={currentMessage[currentMessage.length - 1]}
+      <List>
+        {conversations.map((chat, index)=>(
+          <Link key={index} to={`/pages/chats/${chat.title}`}>
+            <Chat 
+            selected={chat.title===this.props.match.params.roomId} 
+            chat={chat}
             />
           </Link>
         )
-      })}
-    </List>
+        )
+        }
+      </List>
+    
     )
   }
 }

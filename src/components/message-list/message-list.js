@@ -1,4 +1,4 @@
-import {Input, Button, InputAdornment,withStyles, List} from '@material-ui/core'
+import {Input, InputAdornment,withStyles} from '@material-ui/core'
 import {Send} from '@material-ui/icons'
 import React from 'react'
 import {Message} from './message'
@@ -15,73 +15,42 @@ const StyledInput=withStyles((theme)=>({
 }))(Input)
 
 export class MessageList extends React.Component{
-  state={
-    messages:[
-      {author:'User', value:'Message 1!', date:`${new Date()}`}
-    ],
-    value:''
+  handlerChangeInput=(event)=>{
+    this.props.handlerChangeValue(event)
   }
 
-  componentDidUpdate(props,state){
-    const {messages}=this.state
-    const lastMessage=messages[messages.length-1]
-
-    if(lastMessage.author === 'User' && state.messages !== messages){
-      setTimeout(()=>{
-        this.setState({
-          messages:[...messages,{author:'Both',value:' Both message ', date: `${new Date()}`}]
-        })
-      },300)
+  handlerPressInput=({code})=>{
+    if(code==='Enter'){
+      this.handlerSendMessage()
     }
-}
-
-  sendMessage=({author,value})=>{
-    const {messages}=this.state
-
-    this.setState({
-      messages:[...messages,{author,value, date: `${new Date()}`}],
-      value:''
-    })
   }
 
-  handelChangeInput=({target})=>{
-    this.setState({
-      value:target.value
-    })
-  }
-
-  handelPressInput=({code})=>{
-    const {value}=this.state
-    if(code==='Enter'&&value){
-
-        this.sendMessage({author:'User',value})
-
-
-    }
+  handlerSendMessage = () => {
+    const { sendMessage, value } = this.props
+    sendMessage({ author: "User", message: value })
   }
 
   render(){
-    const {messages, value}=this.state
-
+    const {messages, value}=this.props
+    
     return <div className={styles.message__field}>
-    {/* <Input placeholder='Input'/> */}
-    {messages.map((item,idx)=>(<Message message={item} key={idx}/>))}
-    {/* <Button  onClick={this.sendMessage}>Send message</Button> */}
+    
+    {messages.map((item,index)=>(<Message message={item} key={index}/>))}
+    
     <StyledInput 
-    value={value}
-    onChange={this.handelChangeInput}
-    onKeyPress={this.handelPressInput}
-    // onKeyUp={()=>this.sendMessage({author:'User',value})}
-    placeholder='StyledInput' 
-    fullWidth={true} 
-    endAdornment={
-      <InputAdornment>
-      {value&&(<Send className={styles.icon} 
-      onClick={()=>this.sendMessage({author:'User',value})}/>)}
-      </InputAdornment>
+      value={value}
+      onChange={this.handlerChangeInput}
+      onKeyPress={this.handlerPressInput}
+      
+      placeholder='Message...' 
+      fullWidth={true} 
+      endAdornment={
+        <InputAdornment>
+        {value&&(<Send className={styles.icon} 
+        onClick={this.handlerSendMessage}/>)}
+        </InputAdornment>
       }
     />
-
-      </div>
+    </div>
   }
 }
