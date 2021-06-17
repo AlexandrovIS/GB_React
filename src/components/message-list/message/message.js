@@ -1,3 +1,4 @@
+
 import PropTypes from 'prop-types'
 import React from 'react'
 import style from'./messade.module.css'
@@ -12,6 +13,7 @@ export class Message extends React.Component{
   }
 
   render(){
+    
     const {message:{message,author,date}}=this.props
     
     return (

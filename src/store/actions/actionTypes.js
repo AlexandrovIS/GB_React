@@ -1,0 +1,5 @@
+export const EXAMPLE_ACTION='EXAMPLE_ACTION'
+
+export const CHANGE_VALUE ='CHANGE_VALUE'
+
+export const MESSAGE_SEND = "MESSAGE_SEND";

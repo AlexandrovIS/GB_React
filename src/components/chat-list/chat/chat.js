@@ -8,7 +8,9 @@ export class Chat extends React.Component{
   const {chat,selected}=this.props
     
   return (
-    <ListItem selected={selected}>
+    <ListItem 
+    selected={selected}
+    >
     <ListItemAvatar >
       <Avatar>
       <ImageIcon />
