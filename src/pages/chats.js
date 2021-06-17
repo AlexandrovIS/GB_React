@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {Switch,Route} from 'react-router-dom'
-import {Layout,MessageList} from  '../components'
+import {Layout} from  '../components'
 import ChatList from '../components/chat-list/chat-list'
+import MessageList from '../components/message-list/message-list'
 
  export class Chats extends Component{
   render(){
@@ -13,7 +14,7 @@ import ChatList from '../components/chat-list/chat-list'
      <>
         <Layout 
         chatList={<ChatList  {...params}/>}
-        >
+        >         
           <Route path='/pages/chats/:roomId'>
             <MessageList {...params}/>
           </Route>
@@ -29,5 +30,6 @@ import ChatList from '../components/chat-list/chat-list'
     </>
   }
 }
+
 
 

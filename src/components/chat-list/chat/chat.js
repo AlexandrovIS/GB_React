@@ -5,13 +5,11 @@ import React from 'react'
 export class Chat extends React.Component{
   
   render (){
-  const {chat,
-    // selected
-  }=this.props
+  const {chat,selected}=this.props
     
   return (
     <ListItem 
-    // selected={selected}
+    selected={selected}
     >
     <ListItemAvatar >
       <Avatar>

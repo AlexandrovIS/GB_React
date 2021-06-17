@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link,Switch,Route} from 'react-router-dom'
-import Chats from '../../pages/chats'
+import {Chats} from '../../pages/chats'
 import Profil from '../../pages/profil'
 
 

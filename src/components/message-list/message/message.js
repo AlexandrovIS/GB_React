@@ -13,6 +13,7 @@ export class Message extends React.Component{
   }
 
   render(){
+    
     const {message:{message,author,date}}=this.props
     
     return (

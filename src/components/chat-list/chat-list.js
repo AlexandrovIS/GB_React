@@ -4,21 +4,19 @@ import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import { Chat } from './chat'
 
-
-
 class ChatList extends React.Component{
   
   render(){
-    
-    this.props.conversations.map((chat,index)=>console.log(chat,index))
+    const { conversations, match } = this.props
     
     return (
 
       <List>
-        {this.props.conversations.map((chat, index)=>(
-          <Link key={index} to={`/pages/chats/${chat.title}`}>
+        {conversations.map((chat)=>(
+          <Link key={chat.title} to={`/pages/chats/${chat.title}`}>
+            
             <Chat 
-            // selected={chat.title===this.props.match.params.roomId} 
+            selected={chat.title===match.params.roomId} 
             chat={chat}
             />
           </Link>
@@ -33,7 +31,6 @@ class ChatList extends React.Component{
 
 function mapStateToProps(state){
   return{
-    
     conversations:state.conversations
   }
 }

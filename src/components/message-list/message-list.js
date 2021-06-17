@@ -1,6 +1,9 @@
 import {Input, InputAdornment,withStyles} from '@material-ui/core'
 import {Send} from '@material-ui/icons'
 import React from 'react'
+import { connect } from 'react-redux'
+import {changeValue} from '../../store/actions/conversations'
+import {sendMessage} from '../../store/actions/messages'
 import {Message} from './message'
 import styles from './message-list.module.css'
 
@@ -14,9 +17,11 @@ const StyledInput=withStyles((theme)=>({
   }
 }))(Input)
 
-export class MessageList extends React.Component{
+class MessageList extends React.Component{
   handlerChangeInput=(event)=>{
-    this.props.handlerChangeValue(event)
+    const {changeValue,match}=this.props
+    const {roomId}=match.params
+    changeValue(roomId,event?.target.value||"")
   }
 
   handlerPressInput=({code})=>{
@@ -26,17 +31,22 @@ export class MessageList extends React.Component{
   }
 
   handlerSendMessage = () => {
-    const { sendMessage, value } = this.props
-    sendMessage({ author: "User", message: value })
+    
+    const { sendMessage, value, match } = this.props
+    const{roomId}=match.params
+    
+    sendMessage({ author: "User", message: value , roomId:roomId})
+
+    this.handlerChangeInput()
   }
 
   render(){
-    const {messages, value}=this.props
-    
+    const {messages,value}=this.props
     return <div className={styles.message__field}>
     
-    {messages.map((item,index)=>(<Message message={item} key={index}/>))}
-    
+
+    {messages.map((messsage,index)=><Message message={messsage} key={index}/>)}
+     
     <StyledInput 
       value={value}
       onChange={this.handlerChangeInput}
@@ -51,6 +61,24 @@ export class MessageList extends React.Component{
         </InputAdornment>
       }
     />
+
     </div>
   }
 }
+function mapStateToProps(state,props){
+  const {roomId}  = props.match.params
+  return{
+    messages: state.messages[roomId]||[],
+    value:state.conversations.find(
+      (conversation) => conversation.title === roomId,
+    )?.value || "",
+  }
+}
+
+const mapDispachToProps = (dispatch) => ({
+  sendMessage: (params) => dispatch(sendMessage(params)),
+  changeValue: (id, value) => dispatch(changeValue(id, value)),
+})
+
+// eslint-disable-next-line import/no-default-export
+export default connect(mapStateToProps,mapDispachToProps)(MessageList)
