@@ -1,0 +1,9 @@
+.icon {
+  color: rgba(216, 191, 216, 0.8);
+  display: none;
+}
+.message__list {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
